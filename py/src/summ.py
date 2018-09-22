@@ -8,20 +8,14 @@ from sumy.summarizers.lsa import LsaSummarizer as Summarizer
 from sumy.nlp.stemmers import Stemmer
 from sumy.utils import get_stop_words
 
-
 LANGUAGE = "english"
-SENTENCES_COUNT = 3
 
-
-if __name__ == "__main__":
-    url = "https://www.ctvnews.ca/canada/one-dead-following-police-involved-shooting-in-ontario-1.4105199"
-    parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
-    # or for plain text files
-    # parser = PlaintextParser.from_file("document.txt", Tokenizer(LANGUAGE))
+def summarize(doc, SENTENCES_COUNT):
+    parser = HtmlParser.from_string(doc, None, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)
-
     summarizer = Summarizer(stemmer)
     summarizer.stop_words = get_stop_words(LANGUAGE)
-
+    summary = ""
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
-        print(sentence)
+        summary += str(sentence)
+    return summary
