@@ -70,7 +70,6 @@ def get_articles(c, source):
                 "source": source,
                 "date_published": get_date(source, article_content)
             }
-        # print(data[title]["summary"])
             print(data[title])
         except:
             pass
