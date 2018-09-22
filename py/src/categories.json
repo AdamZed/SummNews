@@ -1,0 +1,15 @@
+{
+  "tech": {
+    "bbc": "https://www.bbc.com/news/technology",
+    "futurism": "https://futurism.com/"
+  },
+  "science": {
+    "bbc": "https://www.bbc.com/news/science_and_environment"
+  },
+  "world": {
+    "bbc": "https://www.bbc.com/news/world"
+  },
+  "entertainment": {
+    "bbc": "https://www.bbc.com/news/entertainment_and_arts"
+  }
+}
