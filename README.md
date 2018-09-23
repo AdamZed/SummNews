@@ -1,1 +1,3 @@
-News Summary app
+# SummNews
+
+News summary mobile application
