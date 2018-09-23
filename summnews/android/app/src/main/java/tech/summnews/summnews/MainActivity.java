@@ -1,4 +1,4 @@
-package com.example.summnews;
+package tech.summnews.summnews;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
