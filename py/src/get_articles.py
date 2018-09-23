@@ -50,7 +50,7 @@ def classify_a(src):
     return classes[src]
 
 
-def get_articles(c, source):
+def get_articles(c, source, category):
     soup = BeautifulSoup(c)
     article_refs = soup.find_all('a', class_=classify_a(source))
     data = []
@@ -63,7 +63,6 @@ def get_articles(c, source):
             title = a['title']
         if a.attrs['href'].startswith('http') is False and source == 'bbc':
             a.attrs['href'] = 'http://www.bbc.com'+a.attrs['href']
-        # print(a.attrs['href'])
         article_content = requests.get(a.attrs['href']).content
         try:
             data.append({
@@ -72,10 +71,10 @@ def get_articles(c, source):
                 "summary": summ.summarize(article_content, 8),
                 "image": get_img(source, article_content),
                 "source": source,
-                "date_published": get_date(source, article_content)
+                "date_published": get_date(source, article_content),
+                "category": category
             })
-            # print(data[title])
-        except:
+        except:  # if there is an error, we cannot do much at the moment to support the formatting so just ignore the article
             pass
     return data
 
@@ -83,8 +82,11 @@ def get_articles(c, source):
 def main(category, source="none"):
     if category in categories:
         if source is "none":
+            articles = []
             for src in categories[category]:
-                return get_articles(requests.get(
-                    categories[category][src]).content, src)
+                for article in (get_articles(requests.get(
+                    categories[category][src]).content, src, category)):
+                    articles.append(article)
+            return articles
         else:
-            return get_articles(requests.get(categories[category][source]), source)
+            return get_articles(requests.get(categories[category][source]), source, category)
