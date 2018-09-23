@@ -26,7 +26,6 @@ class _NewsWidgetState extends State<NewsWidget> {
     final res = await http.get(api);
     if (res.statusCode == 200) {
       final toDec = disaster + res.body.substring(1);
-      print(toDec);
       _articles = json.decode(toDec);
     }
     else _articles = null;
