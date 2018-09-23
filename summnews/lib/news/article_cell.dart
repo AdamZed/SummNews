@@ -13,7 +13,7 @@ class ArticleCell extends StatelessWidget {
       onTap: () {
         Navigator.push(context, 
           new MaterialPageRoute(
-            builder: (context) => new DetailPage(article)
+            builder: (context) => new DetailPage(widget: article)
           )
         );
       },

@@ -32,6 +32,7 @@ class HomeState extends State<SummNewsApp> {
         home: new Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.white,
+        brightness: Brightness.light,
         title: new Text(
           "SummNews",
           style: new TextStyle(
