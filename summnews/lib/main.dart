@@ -14,6 +14,7 @@ class SummNewsApp extends StatefulWidget {
 
 class HomeState extends State<SummNewsApp> {
   var _selectedTab = 0;
+  var _selectedCategory = "tech";
   final List<StatefulWidget> _children = [
     news.NewsWidget(),
     settings.SettingsWidget(),
@@ -30,7 +31,13 @@ class HomeState extends State<SummNewsApp> {
     return new MaterialApp(
         home: new Scaffold(
       appBar: new AppBar(
-        title: new Text("SummNews"),
+        backgroundColor: Colors.white,
+        title: new Text(
+          "SummNews",
+          style: new TextStyle(
+            color: Colors.black87
+          )
+        ),
       ),
       body: _children[_selectedTab],
       bottomNavigationBar: BottomNavigationBar(
