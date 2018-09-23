@@ -6,7 +6,7 @@ import './settings/settings_tab.dart' as settings;
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-  .then((_) => runApp(new SummNewsApp()));
+      .then((_) => runApp(new SummNewsApp()));
 }
 
 class SummNewsApp extends StatefulWidget {
@@ -17,11 +17,12 @@ class SummNewsApp extends StatefulWidget {
 }
 
 class HomeState extends State<SummNewsApp> {
+  static final categoryKey = GlobalKey<news.NewsWidgetState>();
   var _selectedTab = 0;
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
   static String _category = "tech";
-  static List<StatefulWidget> _children = [
-    new news.NewsWidget(category: _category),
+  final List<StatefulWidget> _children = [
+    news.NewsWidget(category: _category, key: categoryKey),
     settings.SettingsWidget(),
   ];
 
@@ -45,17 +46,26 @@ class HomeState extends State<SummNewsApp> {
               new ListTile(
                 leading: new Icon(Icons.developer_board),
                 title: new Text('Tech'),
-                onTap: () => changeCategory("tech"),
+                onTap: () => setState(() {
+                      _category = 'tech';
+                      categoryKey.currentState.changeState(_category);
+                    }),
               ),
               new ListTile(
                 leading: new Icon(Icons.school),
                 title: new Text('Science'),
-                // onTap: () => ...,
+                onTap: () => setState(() {
+                      _category = 'science';
+                      categoryKey.currentState.changeState(_category);
+                    }),
               ),
               new ListTile(
                 leading: new Icon(Icons.public),
                 title: new Text('World'),
-                // onTap: () => ...,
+                onTap: () => setState(() {
+                      _category = 'world';
+                      categoryKey.currentState.changeState(_category);
+                    }),
               ),
             ],
           );
@@ -70,13 +80,6 @@ class HomeState extends State<SummNewsApp> {
         });
   }
 
-  void changeCategory(String _category) {
-    _children = [
-      new news.NewsWidget(category: _category),
-      settings.SettingsWidget(),
-    ];
-  }
-
   void onTabTapped(int index) {
     setState(() {
       _selectedTab = index;
@@ -86,40 +89,43 @@ class HomeState extends State<SummNewsApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: new Scaffold(
-      key: _scaffoldKey,
-      appBar: new AppBar(
-        backgroundColor: Colors.white,
-        brightness: Brightness.light,
-        title: new Text("SummNews | " + _category,
-            style: new TextStyle(color: Colors.black87)),
-      ),
-      body: _children[_selectedTab],
-      bottomNavigationBar: new Theme(
-          data: Theme.of(context).copyWith(
-              primaryColor: Colors.red, textTheme: Theme.of(context).textTheme),
-          child: new BottomAppBar(
-            color: Colors.white,
-            child: new BottomNavigationBar(
-              onTap: onTabTapped,
-              currentIndex: _selectedTab,
-              items: [
-                BottomNavigationBarItem(
-                  icon: new Icon(Icons.new_releases),
-                  title: new Text('News'),
+          key: _scaffoldKey,
+          appBar: new AppBar(
+            backgroundColor: Colors.white,
+            brightness: Brightness.light,
+            title: new Text("SummNews | " + _category,
+                style: new TextStyle(color: Colors.black87)),
+          ),
+          body: _children[_selectedTab],
+          bottomNavigationBar: new Theme(
+              data: Theme.of(context).copyWith(
+                  primaryColor: Colors.red,
+                  textTheme: Theme.of(context).textTheme),
+              child: new BottomAppBar(
+                color: Colors.white,
+                child: new BottomNavigationBar(
+                  onTap: onTabTapped,
+                  currentIndex: _selectedTab,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: new Icon(Icons.new_releases),
+                      title: new Text('News'),
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.settings),
+                      title: Text('Settings'),
+                    )
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  title: Text('Settings'),
-                )
-              ],
-            ),
-          )),
-      floatingActionButton: new FloatingActionButton(
-          onPressed: _showBottomSheet,
-          backgroundColor: Colors.red,
-          child: new Icon(Icons.view_headline)),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    ));
+              )),
+          floatingActionButton: new FloatingActionButton(
+              onPressed: _showBottomSheet,
+              backgroundColor: Colors.red,
+              child: new Icon(Icons.view_headline)),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+        ));
   }
 }
