@@ -18,6 +18,6 @@ def summarize(doc, SENTENCES_COUNT):
     summarizer.stop_words = get_stop_words(LANGUAGE)
     summary = ""
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
-        if str(sentence).strip().startswith("Image copyrightGetty") is False:
+        if str(sentence).strip().startswith("Image copyright") is False:
             summary += (" " + str(sentence))
     return summary
