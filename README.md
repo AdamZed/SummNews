@@ -11,3 +11,16 @@ News mobile application
 `/summnews/` holds the frontend Flutter codebase for the app
 
 Firebase is the database of choice
+
+### Installation
+
+Clone the repo and move into Flutter workspace
+`git clone https://github.com/AdamZed/SummNews && cd summnews/summnews`
+
+Install flutter dependencies
+`flutter packages get`
+
+Connect an Android or iOS device/emulator, then run the application with
+`flutter run`
+
+Enjoy the app :)
