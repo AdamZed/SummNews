@@ -23,14 +23,17 @@ class ArticleCell extends StatelessWidget {
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              new Image.network(article["image"]),
+              new ClipRRect(
+                borderRadius: new BorderRadius.circular(10.0),
+                child: Image.network(article["image"])
+              ),
               new Container(
                 height: 10.0,
               ),
-              new Text(
-                article["title"],
-                style:
-                    new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              new Text( article["category"] != "disaster"
+                ? article["title"]
+                : '🔴 ' + article["title"],
+                style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)
               )
             ],
           )
