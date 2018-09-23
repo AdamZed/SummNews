@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 import summ
 import re
 
+with open('categories.json') as categories_file:
+    categories = json.load(categories_file)
+
 
 def get_date(src, content):
     attrs = {
@@ -16,7 +19,6 @@ def get_date(src, content):
     if src in div_src:
         return soup.find('div', {attrs[src]: True})[attrs[src]]
     elif src == 'futurism':
-        print('ayy')
         return soup.find_all('div', class_=attrs[src])[0].findChildren('span', recrusive=False)[1].text
 
 
@@ -47,10 +49,10 @@ def classify_a(src):
     return classes[src]
 
 
-def get_articles(c, source):
+def get_articles(c, source, category):
     soup = BeautifulSoup(c)
     article_refs = soup.find_all('a', class_=classify_a(source))
-    data = {}
+    data = []
     for a in article_refs:
         if a.string:
             title = a.string.strip()
@@ -60,32 +62,32 @@ def get_articles(c, source):
             title = a['title']
         if a.attrs['href'].startswith('http') is False and source == 'bbc':
             a.attrs['href'] = 'http://www.bbc.com'+a.attrs['href']
-        # print(a.attrs['href'])
         article_content = requests.get(a.attrs['href']).content
         try:
-            data[title] = {
+            data.append({
+                "title": title,
                 "url": a.attrs['href'],
                 "summary": summ.summarize(article_content, 8),
                 "image": get_img(source, article_content),
                 "source": source,
-                "date_published": get_date(source, article_content)
-            }
-            print(data[title])
-        except:
+                "date_published": get_date(source, article_content),
+                "category": category
+            })
+            if len(data) == 3:
+                break
+        except:  # if there is an error, we cannot do much at the moment to support the formatting so just ignore the article
             pass
+    return data
 
 
-def open_sources(category, source="none"):
+def main(category, source="none"):
     if category in categories:
         if source is "none":
+            articles = []
             for src in categories[category]:
-                get_articles(requests.get(
-                    categories[category][src]).content, src)
+                for article in (get_articles(requests.get(
+                    categories[category][src]).content, src, category)):
+                    articles.append(article)
+            return articles
         else:
-            get_articles(requests.get(categories[category][source]), source)
-
-
-if __name__ == "__main__":
-    with open('categories.json') as categories_file:
-        categories = json.load(categories_file)
-    open_sources("tech")
+            return get_articles(requests.get(categories[category][source]), source, category)

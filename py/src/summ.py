@@ -17,5 +17,5 @@ def summarize(doc, SENTENCES_COUNT):
     summarizer.stop_words = get_stop_words(LANGUAGE)
     summary = ""
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
-        summary += str(sentence)
+        summary += (" " + str(sentence))
     return summary
