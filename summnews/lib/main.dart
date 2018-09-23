@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import './news/news_tab.dart' as news;
 import './settings/settings_tab.dart' as settings;
 
-void main() => runApp(new SummNewsApp());
+void main() {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  .then((_) => runApp(new SummNewsApp()));
+}
 
 class SummNewsApp extends StatefulWidget {
   @override
