@@ -14,9 +14,9 @@ class SummNewsApp extends StatefulWidget {
 
 class HomeState extends State<SummNewsApp> {
   var _selectedTab = 0;
-  var _selectedCategory = "tech";
+  static String _category = "tech";
   final List<StatefulWidget> _children = [
-    news.NewsWidget(),
+    new news.NewsWidget(category: _category),
     settings.SettingsWidget(),
   ];
 
