@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './detail_page.dart';
 
 class ArticleCell extends StatelessWidget {
   final article;
@@ -7,19 +8,12 @@ class ArticleCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = article['title'];
-    final summary = article['summary'];
-    final date = article['date_published'];
-    final src = article['src'];
 
     return new GestureDetector(
       onTap: () {
         Navigator.push(context, 
           new MaterialPageRoute(
-            builder: (context) => new Text(
-              '$title\n$src: $date\n\n$summary',
-              style: new TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-            )
+            builder: (context) => new DetailPage(article)
           )
         );
       },
@@ -31,12 +25,12 @@ class ArticleCell extends StatelessWidget {
             children: <Widget>[
               new Image.network(article["image"]),
               new Container(
-                height: 8.0,
+                height: 10.0,
               ),
               new Text(
-                title,
+                article["title"],
                 style:
-                    new TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               )
             ],
           )
