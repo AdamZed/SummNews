@@ -19,7 +19,6 @@ def get_date(src, content):
     if src in div_src:
         return soup.find('div', {attrs[src]: True})[attrs[src]]
     elif src == 'futurism':
-        print('ayy')
         return soup.find_all('div', class_=attrs[src])[0].findChildren('span', recrusive=False)[1].text
 
 
@@ -74,6 +73,8 @@ def get_articles(c, source, category):
                 "date_published": get_date(source, article_content),
                 "category": category
             })
+            if len(data) == 3:
+                break
         except:  # if there is an error, we cannot do much at the moment to support the formatting so just ignore the article
             pass
     return data

@@ -1,5 +1,9 @@
 import pyrebase
 import get_articles
+import json
+
+with open('categories.json') as categories_file:
+    categories = json.load(categories_file)
 
 with open('api_key.txt') as f:
     API_KEY = f.read()
@@ -16,4 +20,5 @@ config = {
 db = pyrebase.initialize_app(config).database()
 # data = get_articles.main("tech")
 # print(data)
-db.child("articles").set(get_articles.main("tech"))
+for category in categories:
+    db.child("articles").child(category).set(get_articles.main(category))
