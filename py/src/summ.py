@@ -10,6 +10,7 @@ from sumy.utils import get_stop_words
 
 LANGUAGE = "english"
 
+
 def summarize(doc, SENTENCES_COUNT):
     parser = HtmlParser.from_string(doc, None, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)
@@ -17,5 +18,6 @@ def summarize(doc, SENTENCES_COUNT):
     summarizer.stop_words = get_stop_words(LANGUAGE)
     summary = ""
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
-        summary += (" " + str(sentence))
+        if str(sentence).strip().startswith("Image copyrightGetty") is False:
+            summary += (" " + str(sentence))
     return summary
