@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 import summ
 import re
 
+with open('categories.json') as categories_file:
+    categories = json.load(categories_file)
+
 
 def get_date(src, content):
     attrs = {
@@ -50,7 +53,7 @@ def classify_a(src):
 def get_articles(c, source):
     soup = BeautifulSoup(c)
     article_refs = soup.find_all('a', class_=classify_a(source))
-    data = {}
+    data = []
     for a in article_refs:
         if a.string:
             title = a.string.strip()
@@ -63,29 +66,25 @@ def get_articles(c, source):
         # print(a.attrs['href'])
         article_content = requests.get(a.attrs['href']).content
         try:
-            data[title] = {
+            data.append({
+                "title": title,
                 "url": a.attrs['href'],
                 "summary": summ.summarize(article_content, 8),
                 "image": get_img(source, article_content),
                 "source": source,
                 "date_published": get_date(source, article_content)
-            }
-            print(data[title])
+            })
+            # print(data[title])
         except:
             pass
+    return data
 
 
-def open_sources(category, source="none"):
+def main(category, source="none"):
     if category in categories:
         if source is "none":
             for src in categories[category]:
-                get_articles(requests.get(
+                return get_articles(requests.get(
                     categories[category][src]).content, src)
         else:
-            get_articles(requests.get(categories[category][source]), source)
-
-
-if __name__ == "__main__":
-    with open('categories.json') as categories_file:
-        categories = json.load(categories_file)
-    open_sources("tech")
+            return get_articles(requests.get(categories[category][source]), source)
