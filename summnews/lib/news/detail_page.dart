@@ -34,9 +34,20 @@ class DetailPage extends StatelessWidget {
           new Text(
             '$summary',
             style: new TextStyle(fontSize: 14.0),
-          )
+          ),
+          new Container(
+            height: 100.0,
+          ),
         ],
       ),
+    floatingActionButton: new FloatingActionButton(
+      elevation: 0.0,
+      child: new Icon(Icons.open_in_new),
+      backgroundColor: Colors.blue,
+      onPressed: (){},
+      tooltip: "View full article",
+      
+    ),
     );
   }
 }
