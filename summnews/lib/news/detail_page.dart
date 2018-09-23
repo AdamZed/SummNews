@@ -29,7 +29,7 @@ class DetailPage extends StatelessWidget {
             style: new TextStyle(fontSize: 14.0),
           ),
           new Container(
-            height: 10.0,
+            height: 12.5,
           ),
           new Text(
             '$summary',
@@ -43,10 +43,9 @@ class DetailPage extends StatelessWidget {
     floatingActionButton: new FloatingActionButton(
       elevation: 0.0,
       child: new Icon(Icons.open_in_new),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.red,
       onPressed: (){},
       tooltip: "View full article",
-      
     ),
     );
   }
