@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatelessWidget {
   final article;
@@ -16,7 +17,10 @@ class DetailPage extends StatelessWidget {
       body: new ListView(
         padding: new EdgeInsets.all(16.0),
         children: <Widget>[
-          new Image.network(img),
+          new Container(
+            height: 15.0,
+          ),
+          new Image.network(img, fit: BoxFit.fitWidth, alignment: Alignment.center,),
           new Container(
             height: 10.0,
           ),
@@ -44,9 +48,13 @@ class DetailPage extends StatelessWidget {
       elevation: 0.0,
       child: new Icon(Icons.open_in_new),
       backgroundColor: Colors.red,
-      onPressed: (){},
+      onPressed: () async {
+        final url = article['url'];
+        if (await canLaunch(url)) await launch(url);
+      } ,
       tooltip: "View full article",
     ),
     );
   }
+
 }
