@@ -1,4 +1,4 @@
-package com.example.client;
+package com.example.summnews;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

@@ -1,4 +1,4 @@
-# client
+# summnews
 
 A new Flutter project.
 

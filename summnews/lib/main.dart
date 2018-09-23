@@ -52,8 +52,8 @@ class HomeState extends State<SummNewsApp> {
         ],
       ),
       body: new Center(
-        child: _isLoading
-            ? new CircularProgressIndicator()
+        child: fails > 2
+            ? new Text("Timed out, try again later.") : (_isLoading ? new CircularProgressIndicator()
             : new ListView.builder(
                 itemCount: this._articles != null
                     ? (this._articles.length > 15 ? 15 : this._articles.length)
@@ -63,7 +63,8 @@ class HomeState extends State<SummNewsApp> {
                     child: ArticleCell(this._articles[i]),
                     onPressed: () {},
                   );
-                }),
+                }
+            )),
       ),
     ));
   }
