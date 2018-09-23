@@ -8,8 +8,5 @@
   },
   "world": {
     "bbc": "https://www.bbc.com/news/world"
-  },
-  "entertainment": {
-    "bbc": "https://www.bbc.com/news/entertainment_and_arts"
   }
 }
