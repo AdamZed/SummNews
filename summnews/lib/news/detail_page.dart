@@ -1,42 +1,17 @@
 import 'package:flutter/material.dart';
 
-class DetailPageWidget extends StatefulWidget {
-  DetailPageWidget({Key key, this.article}) : super(key: key);
+class DetailPage extends StatelessWidget {
   final article;
-  @override
-  _DetailWidgetState createState() => _DetailWidgetState(); 
-}
 
-class _DetailWidgetState extends State<DetailPageWidget> {
+  const DetailPage(this.article);
 
- @override
-  initState(){
-    super.initState();
-    _isVisible = true;
-    _hideButtonController = new ScrollController();
-    _hideButtonController.addListener((){
-      if(_hideButtonController.position.userScrollDirection == ScrollDirection.reverse){
-        setState((){
-          _isVisible = true;
-         print("**** ${_isVisible} up");
-        });
-      }
-      if(_hideButtonController.position.userScrollDirection == ScrollDirection.forward){
-        setState((){
-          _isVisible = false;
-          print("**** ${_isVisible} down");
-
-        });
-      }
-    });
-  }
   @override
   Widget build(BuildContext context) {
-    final title = widget.article['title'];
-    final summary = widget.article['summary'];
-    final date = widget.article['date_published'];
-    final src = widget.article['source'];
-    final img = widget.article['image'];
+    final title = article['title'];
+    final summary = article['summary'];
+    final date = article['date_published'];
+    final src = article['source'];
+    final img = article['image'];
     return new Scaffold(
       body: new ListView(
         padding: new EdgeInsets.all(16.0),
@@ -76,4 +51,3 @@ class _DetailWidgetState extends State<DetailPageWidget> {
     );
   }
 }
-
