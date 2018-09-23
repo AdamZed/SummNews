@@ -4,6 +4,13 @@ import './article_cell.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+class NewsWidget extends StatefulWidget {
+  final String category;
+  NewsWidget({Key key, this.category}): super(key: key);
+  @override
+  _NewsWidgetState createState() => _NewsWidgetState(); 
+}
+
 class _NewsWidgetState extends State<NewsWidget> {
   var maxToLoad = 100;
   var _isLoading = true;
@@ -14,7 +21,7 @@ class _NewsWidgetState extends State<NewsWidget> {
     setState(() {
       _isLoading = true;
     });
-    final api = 'https://newsumm-70f1d.firebaseio.com/articles/science.json';
+    final api = 'https://newsumm-70f1d.firebaseio.com/articles/${widget.category}.json';
     final res = await http.get(api);
     if (res.statusCode == 200)
       _articles = json.decode(res.body);
@@ -42,9 +49,4 @@ class _NewsWidgetState extends State<NewsWidget> {
               }),
     );
   }
-}
-
-class NewsWidget extends StatefulWidget {
-  @override
-  _NewsWidgetState createState() => _NewsWidgetState(); 
 }
