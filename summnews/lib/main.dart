@@ -32,28 +32,36 @@ class HomeState extends State<SummNewsApp> {
         home: new Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.white,
-        title: new Text(
-          "SummNews",
-          style: new TextStyle(
-            color: Colors.black87
-          )
-        ),
+        title:
+            new Text("SummNews", style: new TextStyle(color: Colors.black87)),
       ),
       body: _children[_selectedTab],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _selectedTab,
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.new_releases),
-            title: new Text('News'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            title: Text('Settings'),
-          )
-        ],
-      ),
+      bottomNavigationBar: new Theme(
+          data: Theme.of(context).copyWith(
+              primaryColor: Colors.red, textTheme: Theme.of(context).textTheme),
+          child: new BottomAppBar(
+            color: Colors.white,
+            child: new BottomNavigationBar(
+              onTap: onTabTapped,
+              currentIndex: _selectedTab,
+              items: [
+                BottomNavigationBarItem(
+                  icon: new Icon(Icons.new_releases),
+                  title: new Text('News'),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings),
+                  backgroundColor: Colors.red,
+                  title: Text('Settings'),
+                )
+              ],
+            ),
+          )),
+      floatingActionButton: new FloatingActionButton(
+          onPressed: null,
+          backgroundColor: Colors.red,
+          child: new Icon(Icons.view_headline)),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     ));
   }
 }
