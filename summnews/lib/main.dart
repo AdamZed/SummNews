@@ -95,9 +95,12 @@ class HomeState extends State<SummNewsApp> {
           appBar: new AppBar(
             backgroundColor: Colors.white,
             brightness: Brightness.light,
-            title: new Text("SummNews | " + _category,
-                style: new TextStyle(color: Colors.black87)),
-          ),
+            title: _selectedTab == 0
+              ? new Text("SummNews | " + _category,
+                style: new TextStyle(color: Colors.black87))
+              : new Text("SummNews | settings", style: new TextStyle(color: Colors.black87)
+              )
+            ),
           body: _children[_selectedTab],
           bottomNavigationBar: new Theme(
               data: Theme.of(context).copyWith(
