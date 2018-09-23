@@ -14,11 +14,64 @@ class SummNewsApp extends StatefulWidget {
 
 class HomeState extends State<SummNewsApp> {
   var _selectedTab = 0;
+  final _scaffoldKey = new GlobalKey<ScaffoldState>();
   static String _category = "tech";
-  final List<StatefulWidget> _children = [
+  static List<StatefulWidget> _children = [
     new news.NewsWidget(category: _category),
     settings.SettingsWidget(),
   ];
+
+  VoidCallback _showBottomSheetCB;
+
+  @override
+  void initState() {
+    super.initState();
+    _showBottomSheetCB = _showBottomSheet;
+  }
+
+  void _showBottomSheet() {
+    setState(() {
+      _showBottomSheetCB = null;
+    });
+    _scaffoldKey.currentState
+        .showBottomSheet((context) {
+          return new Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              new ListTile(
+                leading: new Icon(Icons.developer_board),
+                title: new Text('Tech'),
+                onTap: () => changeCategory("tech"),
+              ),
+              new ListTile(
+                leading: new Icon(Icons.school),
+                title: new Text('Science'),
+                // onTap: () => ...,
+              ),
+              new ListTile(
+                leading: new Icon(Icons.public),
+                title: new Text('World'),
+                // onTap: () => ...,
+              ),
+            ],
+          );
+        })
+        .closed
+        .whenComplete(() {
+          if (mounted) {
+            setState(() {
+              _showBottomSheetCB = _showBottomSheet;
+            });
+          }
+        });
+  }
+
+  void changeCategory(String _category) {
+    _children = [
+      new news.NewsWidget(category: _category),
+      settings.SettingsWidget(),
+    ];
+  }
 
   void onTabTapped(int index) {
     setState(() {
@@ -30,15 +83,12 @@ class HomeState extends State<SummNewsApp> {
   Widget build(BuildContext context) {
     return new MaterialApp(
         home: new Scaffold(
+      key: _scaffoldKey,
       appBar: new AppBar(
         backgroundColor: Colors.white,
         brightness: Brightness.light,
-        title: new Text(
-          "SummNews",
-          style: new TextStyle(
-            color: Colors.black87
-          )
-        ),
+        title: new Text("SummNews | " + _category,
+            style: new TextStyle(color: Colors.black87)),
       ),
       body: _children[_selectedTab],
       bottomNavigationBar: new Theme(
@@ -56,14 +106,13 @@ class HomeState extends State<SummNewsApp> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.settings),
-                  backgroundColor: Colors.red,
                   title: Text('Settings'),
                 )
               ],
             ),
           )),
       floatingActionButton: new FloatingActionButton(
-          onPressed: null,
+          onPressed: _showBottomSheet,
           backgroundColor: Colors.red,
           child: new Icon(Icons.view_headline)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
