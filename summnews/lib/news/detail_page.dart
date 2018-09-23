@@ -33,7 +33,7 @@ class DetailPage extends StatelessWidget {
             ),
             new ClipRRect(
                 borderRadius: new BorderRadius.circular(10.0),
-                child: Image.network(img, fit: BoxFit.fill)),
+                child: Image.network(img, fit: BoxFit.cover)),
             new Container(
               height: 15.0,
             ),

@@ -34,7 +34,17 @@ class ArticleCell extends StatelessWidget {
                 ? article["title"]
                 : '🔴 ' + article["title"],
                 style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)
-              )
+              ),
+              new Container(height:5.0),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  new Text(article['source'],
+                  style: new TextStyle(fontSize: 14.0,),),
+                  new Text(article['date_published'],
+                  style: new TextStyle(fontSize: 14.0,),),
+                ],
+                )
             ],
           )
         )
