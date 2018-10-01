@@ -1,5 +1,5 @@
 # SummNews
-![SummNews](https://raw.githubusercontent.com/AdamZed/SummNews/master/summnews/assets/icon/appicon.png)
+<img src="https://github.com/AdamZed/SummNews/raw/master/summnews/assets/icon/appicon.png" width="200">
 
 News mobile application
 
