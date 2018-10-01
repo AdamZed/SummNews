@@ -1,7 +1,11 @@
 # SummNews
-![SummNews](https://i.imgur.com/tHwASmH.png)
+![SummNews](https://raw.githubusercontent.com/AdamZed/SummNews/master/summnews/assets/icon/appicon.png)
 
 News mobile application
+
+### Developed by:
+[Adam Zanon](https://github.com/AdamZed)
+[Michael Roudnitski](https://github.com/MichaelRoudnitski)
 
 ### Project overview
 `/py/` holds python codebase for maintaining web scraping and database updating
@@ -27,5 +31,3 @@ Install flutter dependencies
 Connect an Android or iOS device/emulator, then run the application with
 
 `flutter run`
-
-Enjoy the app :)
