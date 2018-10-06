@@ -1,6 +1,6 @@
 # SummNews <img src="https://github.com/AdamZed/SummNews/raw/master/summnews/assets/icon/appicon.png" height="48">
 
-<img src="https://he-s3.s3.amazonaws.com/media/sprint/yorku-hacks/team/446262/30718b6img_3411.png" height="500">
+<img src="https://i.imgur.com/rPBmMDy.png" height="500"><img src="https://i.imgur.com/cqDMryi.png" height="500">
 
 News mobile application
 
