@@ -2,10 +2,15 @@
 
 <img src="https://i.imgur.com/rPBmMDy.png" height="500"><img src="https://i.imgur.com/cqDMryi.png" height="500">
 
-News mobile application
+News mobile application made in 24 hours for YorkU Hacks 2018
+
+### Video Showcase
+
+[![Video Demo](https://img.youtube.com/vi/eiSALJj7fdQ/0.jpg)](https://www.youtube.com/watch?v=eiSALJj7fdQ)
 
 ### Developed by:
 [Adam Zanon](https://github.com/AdamZed)
+
 [Michael Roudnitski](https://github.com/MichaelRoudnitski)
 
 ### Project overview
